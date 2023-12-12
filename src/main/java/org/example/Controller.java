@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 @Slf4j
@@ -35,6 +37,25 @@ public class Controller {
         initProcess();
         replaceIntellijFiles();
         createMvnProject();
+        mvnCleanInstall();
+    }
+
+    private void mvnCleanInstall() throws Exception
+    {
+        ProcessBuilder builder = new ProcessBuilder();
+        builder.command("cmd.exe", "/c", "mvn", "clean", "install");
+        builder.directory(mvnDev);
+        Process process = builder.start();
+        BufferedReader inStreamReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+        while( inStreamReader.readLine() != null )
+            System.out.println(inStreamReader.readLine());
+
+        int exitCode = process.waitFor();
+        if( exitCode == 0 )
+            log.info("*************Build success*************");
+        else
+            log.error("Build Failed");
     }
 
     private void replaceIntellijFiles() throws IOException
@@ -65,7 +86,8 @@ public class Controller {
         File[] files = moduleFolder.listFiles();
         for( File file : files )
         {
-            if( !file.getName().equals("src") && !file.getName().equals("database") )
+            if( !file.getName().equals("src") && !file.getName().equals("database") && !file.getName().equals(
+                    "resources") )
                 FileUtil.deleteFolder(file);
         }
     }
@@ -96,7 +118,7 @@ public class Controller {
                 log.info("Creating Maven structure in : {}", moduleFolder);
                 createMavenProjectStructure(moduleFolder);
             }
-            log.info("Successfully coppied ant code base");
+            log.info("Successfully Created Maven Project");
         }
         catch( Exception e )
         {
@@ -127,6 +149,15 @@ public class Controller {
 
             File newResources = new File(main.getAbsoluteFile() + File.separator + "resources");
             File oldResources = new File(antCodeBase.getAbsoluteFile() + File.separator + "Resources");
+            FileUtils.copyDirectory(oldResources, newResources);
+
+            oldResources = new File(moduleFolder.getAbsoluteFile() + File.separator + "resources");
+            FileUtils.copyDirectory(oldResources, newResources);
+            FileUtil.deleteFolder(oldResources);
+            FileUtil.deleteFolder(new File(newResources.getAbsoluteFile() + File.separator + "log4j2.properties"));
+
+            File backup = new File("backup");
+            oldResources = new File(backup.getAbsoluteFile() + File.separator + "properties");
             FileUtils.copyDirectory(oldResources, newResources);
         }
 

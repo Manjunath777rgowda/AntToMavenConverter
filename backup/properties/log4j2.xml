@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright(C) 2020-21. Nuvepro Pvt. Ltd. All rights reserved
+  ~
+  -->
+
+<Configuration packages="biz.paluch.logging.gelf.log4j2"  monitorInterval="5">
+
+    <Properties>
+        <property name="logPath">/var/log/nuvelink/</property>
+        <property name="filenameServerLog">server.log</property>
+        <property name="filenameEngineLog">engine.log</property>
+        <property name="environment">NL-MAIN</property>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{[dd/MM/yyyy HH:mm:ss:SSS]}, %X, [%3p], [%t], [%C], [%M]-[%L], [%m]%n"/>
+        </Console>
+
+        <RollingFile name="serverLog"
+                     fileName="${logPath}${filenameServerLog}"
+                     filePattern="${logPath}${filenameServerLog}.%d{yyyy-MM-dd}-%i.log.gz">
+                       <PatternLayout pattern="%d{[dd/MM/yyyy HH:mm:ss:SSS]}, %X, [%3p], [%t], [%C], [%M]-[%L], [%m]%n"/>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy
+                        size="100 MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="engineLogger"
+                     fileName="${logPath}${filenameEngineLog}"
+                     filePattern="${logPath}${filenameEngineLog}.%d{yyyy-MM-dd}-%i.log.gz">
+                       <PatternLayout pattern="%d{[dd/MM/yyyy HH:mm:ss:SSS]}, [%3p], [%t], [%C], [%M]-[%L], [%m]%n"/>
+            <Policies>
+               <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy
+                        size="100 MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+<!--        <Gelf name="Gelf" host="tcp:localhost" port="12201" version="1.0" extractStackTrace="true"-->
+<!--              filterStackTrace="true" mdcProfiling="true" includeFullMdc="true" maximumMessageSize="8192"-->
+<!--              originHost="localhost">-->
+<!--            <Field name="timestamp" pattern=""/>-->
+<!--            <Field name="loggerLevel" pattern="%level"/>-->
+<!--            <Field name="simpleClassName" pattern="%C{1}"/>-->
+<!--            <Field name="className" pattern="%C"/>-->
+<!--            <Field name="functionAndLine" pattern="%M:%line"/>-->
+<!--            <Field name="thread" pattern="%t"/>-->
+<!--            <Field name="server" pattern="%host"/>-->
+<!--            <Field name="server.fqdn" pattern="%host{fqdn}"/>-->
+<!--            <Field name="environment" literal="${environment}"/>-->
+<!--            <Field name="logId" mdc="logId"/> &lt;!&ndash; This is a field using MDC &ndash;&gt;-->
+<!--        </Gelf>-->
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="DEBUG">
+            <AppenderRef ref="Console"/>
+            <!-- <AppenderRef ref="Gelf"/> -->
+            <AppenderRef ref="serverLog"/>
+        </Root>
+
+        <Logger name="engineLogger" additivity="false">
+            <AppenderRef ref="engineLogger"/>
+        </Logger>
+    
+    </Loggers>
+
+</Configuration>
