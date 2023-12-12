@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
@@ -48,17 +47,22 @@ public class Controller {
         Process process = builder.start();
         BufferedReader inStreamReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-        while( inStreamReader.readLine() != null )
-            System.out.println(inStreamReader.readLine());
+        String line;
+        do
+        {
+            line = inStreamReader.readLine();
+            if( line != null )
+                System.out.println(line);
+        } while( line != null );
 
         int exitCode = process.waitFor();
         if( exitCode == 0 )
-            log.info("*************Build success*************");
+            System.out.println("*************Build success*************");
         else
-            log.error("Build Failed");
+            System.out.println("-----------------Build Failed--------------------");
     }
 
-    private void replaceIntellijFiles() throws IOException
+    private void replaceIntellijFiles() throws Exception
     {
         log.info("Replacing Intellij Files");
         File backup = new File("backup");
@@ -67,9 +71,10 @@ public class Controller {
         log.info("Successfully replaced Intellij Files");
     }
 
-    private void backup( File backup ) throws Exception
+    private void backup() throws Exception
     {
         log.info("Backup pom.xml");
+        File backup = new File("backup");
         File pom = new File(backup.getAbsoluteFile() + File.separator + "pom");
         File intellij = new File(backup.getAbsoluteFile() + File.separator + "intellij");
         backupPomFile(pom);
@@ -94,8 +99,7 @@ public class Controller {
 
     private void initProcess() throws Exception
     {
-        File backup = new File("backup");
-        backup(backup);
+        backup();
         FileUtil.deleteFolder(mvnCodeBase);
         FileUtil.createFolder(mvnCodeBase);
         FileUtil.createFolder(mvnDev);
@@ -159,6 +163,10 @@ public class Controller {
             File backup = new File("backup");
             oldResources = new File(backup.getAbsoluteFile() + File.separator + "properties");
             FileUtils.copyDirectory(oldResources, newResources);
+
+            File reports = new File(newResources.getAbsoluteFile() + File.separator + "Reports");
+            FileUtils.copyDirectory(reports, new File(moduleFolder.getAbsoluteFile() + File.separator + "Reports"));
+            FileUtil.deleteFolder(reports);
         }
 
         copyPomFiles(moduleFolder);

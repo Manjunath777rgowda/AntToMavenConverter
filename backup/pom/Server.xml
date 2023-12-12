@@ -10,7 +10,7 @@
 
     <groupId>com.middleware.nuvelink.server</groupId>
     <artifactId>Server</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>Server</name>
     <url>http://maven.apache.org</url>
 
@@ -318,10 +318,6 @@
                         <resource>
                             <directory>lib</directory>
                             <targetPath>WEB-INF/lib</targetPath>
-                        </resource>
-                        <resource>
-                            <directory>resources</directory>
-                            <targetPath>WEB-INF/classes</targetPath>
                         </resource>
                         <resource>
                             <directory>database</directory>
