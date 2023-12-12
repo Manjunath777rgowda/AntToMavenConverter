@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>Nuvelink</artifactId>
+    <groupId>com.middleware.nuvelink</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <groupId>com.middleware.nuvelink.gcp</groupId>
+  <artifactId>GCPPlugin</artifactId>
+  <packaging>jar</packaging>
+  <name>GCPPlugin</name>
+  <url>http://maven.apache.org</url>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.middleware.nuvelink.result</groupId>
+      <artifactId>Result</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.middleware.nuvelink.commons</groupId>
+      <artifactId>CommonBeans</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.middleware.nuvelink.commons</groupId>
+      <artifactId>CommonAPI</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.middleware.nuvelink</groupId>
+      <artifactId>jspf.core</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/../../3rd_Party_Tools/JSPF/1.0.2/jspf.core-1.0.2.jar</systemPath>
+    </dependency>
+
+<!--    <dependency>-->
+<!--      <groupId>org.apache.commons</groupId>-->
+<!--      <artifactId>commons-csv</artifactId>-->
+<!--      <version>1.1</version>-->
+<!--    </dependency>-->
+
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-storage</artifactId>
+      <version>v1-rev116-1.22.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-admin-directory</artifactId>
+      <version>directory_v1-rev105-1.25.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-cloudresourcemanager</artifactId>
+      <version>v1-rev550-1.25.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>3.8.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-cloudbilling</artifactId>
+      <version>v1-rev20180806-1.27.0</version>
+    </dependency>
+  </dependencies>
+</project>

@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>Nuvelink</artifactId>
+    <groupId>com.middleware.nuvelink</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <groupId>com.middleware.nuvelink.azure</groupId>
+  <artifactId>AzurePlugin</artifactId>
+  <packaging>jar</packaging>
+  <name>AzurePlugin</name>
+  <url>http://maven.apache.org</url>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.middleware.nuvelink.result</groupId>
+      <artifactId>Result</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.middleware.nuvelink.commons</groupId>
+      <artifactId>CommonBeans</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.middleware.nuvelink.commons</groupId>
+      <artifactId>CommonAPI</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.middleware.nuvelink</groupId>
+      <artifactId>jspf.core</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/../../3rd_Party_Tools/JSPF/1.0.2/jspf.core-1.0.2.jar</systemPath>
+    </dependency>
+
+
+  </dependencies>
+</project>
