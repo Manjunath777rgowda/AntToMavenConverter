@@ -21,7 +21,7 @@
       <artifactId>jspf.core</artifactId>
       <version>1.0</version>
       <scope>system</scope>
-      <systemPath>${project.basedir}/../../3rd_Party_Tools/JSPF/1.0.2/jspf.core-1.0.2.jar</systemPath>
+        <systemPath>${jspf.jar}</systemPath>
     </dependency>
 
   </dependencies>
