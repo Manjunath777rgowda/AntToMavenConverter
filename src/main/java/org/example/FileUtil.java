@@ -20,6 +20,9 @@ public class FileUtil {
 
     public static void deleteFolder( File file ) throws Exception
     {
+        if( !file.exists() )
+            return;
+
         boolean delete = FileUtils.deleteQuietly(file);
         if( !delete )
         {

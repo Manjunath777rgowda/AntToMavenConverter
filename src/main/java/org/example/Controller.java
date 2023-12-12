@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
-import java.net.URL;
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -33,19 +33,30 @@ public class Controller {
     public void maven() throws Exception
     {
         initProcess();
+        replaceIntellijFiles();
         createMvnProject();
     }
 
-    @GetMapping("/backup")
-    public void backup() throws Exception
+    private void replaceIntellijFiles() throws IOException
+    {
+        log.info("Replacing Intellij Files");
+        File backup = new File("backup");
+        File intellij = new File(backup.getAbsoluteFile() + File.separator + "intellij");
+        FileUtils.copyDirectory(intellij, new File(mvnDev.getAbsoluteFile() + File.separator + ".idea"));
+        log.info("Successfully replaced Intellij Files");
+    }
+
+    private void backup( File backup ) throws Exception
     {
         log.info("Backup pom.xml");
-        File backup = new File("backup");
         File pom = new File(backup.getAbsoluteFile() + File.separator + "pom");
         File intellij = new File(backup.getAbsoluteFile() + File.separator + "intellij");
         backupPomFile(pom);
         log.info("Backup .idea");
-        FileUtils.copyDirectory(new File(mvnDev.getAbsoluteFile() + File.separator + ".idea"), intellij);
+        File idea = new File(mvnDev.getAbsoluteFile() + File.separator + ".idea");
+        if( idea.exists() )
+            FileUtils.copyDirectory(idea, intellij);
+
         log.info("Backup Complete");
     }
 
@@ -61,6 +72,8 @@ public class Controller {
 
     private void initProcess() throws Exception
     {
+        File backup = new File("backup");
+        backup(backup);
         FileUtil.deleteFolder(mvnCodeBase);
         FileUtil.createFolder(mvnCodeBase);
         FileUtil.createFolder(mvnDev);
@@ -122,10 +135,12 @@ public class Controller {
 
     private void copyPomFiles( File moduleFolder ) throws Exception
     {
-        URL url = getClass().getClassLoader().getResource(
-                "backup/pom" + File.separator + moduleFolder.getName() + "_pom.xml");
-        FileUtils.copyFile(new File(url.toURI()),
-                new File(moduleFolder.getAbsoluteFile() + File.separator + "pom.xml"));
+        File backup = new File("backup");
+        String modulePath = moduleFolder.getAbsoluteFile() + File.separator;
+        File destFile = new File(modulePath + "pom.xml");
+        File srcFile = new File(
+                backup.getAbsoluteFile() + File.separator + "pom" + File.separator + moduleFolder.getName() + ".xml");
+        FileUtils.copyFile(srcFile, destFile);
     }
 
     private void backupPomFile( File backup ) throws Exception

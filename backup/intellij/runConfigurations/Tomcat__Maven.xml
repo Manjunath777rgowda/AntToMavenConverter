@@ -1,0 +1,31 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Tomcat: Maven" type="com.poratu.idea.plugins.tomcat">
+    <predefined_log_file enabled="true" id="Tomcat Localhost Log" />
+    <predefined_log_file enabled="true" id="Tomcat Access Log" />
+    <predefined_log_file id="Tomcat Catalina Log" />
+    <predefined_log_file id="Tomcat Manager Log" />
+    <predefined_log_file id="Tomcat Host Manager Log" />
+    <option name="catalinaBase" value="C:\Users\Admin\.SmartTomcat\Dev\Server" />
+    <option name="contextPath" value="/Server" />
+    <option name="docBase" value="$PROJECT_DIR$/Server/src/main/webapp" />
+    <option name="envOptions">
+      <map>
+        <entry key="NUVELINK_HOME" value="C:\Users\Admin\Downloads\nuvelink" />
+        <entry key="NUVELINK_INSTALLATION_FILE" value="C:\Users\Admin\Downloads\nuvelink" />
+      </map>
+    </option>
+    <option name="extraClassPath" value="" />
+    <option name="tomcatInfo">
+      <TomcatInfo>
+        <option name="name" value="Apache Tomcat/8.5.83" />
+        <option name="path" value="D:/nuvepro_workspace/tomcat/apache-tomcat-8.5.83" />
+        <option name="version" value="8.5.83.0" />
+      </TomcatInfo>
+    </option>
+    <option name="vmOptions" value="" />
+    <module name="Server" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

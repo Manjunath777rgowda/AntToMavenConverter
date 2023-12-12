@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/AmazonPlugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/AmazonPlugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/AzureCSPPlugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/AzureCSPPlugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/AzurePlugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/AzurePlugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonAPI/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonAPI/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonBeans/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonBeans/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/GCPPlugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/GCPPlugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JobEngine/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JobEngine/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/NotificationHandler/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/NotificationHandler/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OpenStackPlugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OpenStackPlugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PowerBIWrapper/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PowerBIWrapper/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Result/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Result/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SessionManager/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SessionManager/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/VMUnifyPlugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/VMUnifyPlugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
