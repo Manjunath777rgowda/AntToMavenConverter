@@ -146,13 +146,4 @@ public class Controller {
 
 
     }
-
-    private void copyPomFile( File folder, String module ) throws Exception
-    {
-        String pomFileName = "pom.xml";
-        File mvnPomFile = new File(mvnDev + File.separator + pomFileName);
-        File backupPomFileName = new File(folder.getAbsoluteFile() + File.separator + module + "_pom.xml");
-        if( mvnPomFile.exists() )
-            FileUtils.copyFile(mvnPomFile, backupPomFileName);
-    }
 }
