@@ -29,11 +29,24 @@ public class Controller {
     @Value("${modules}")
     private List<String> modules;
 
-    @GetMapping
-    public void get() throws Exception
+    @GetMapping("/maven")
+    public void maven() throws Exception
     {
         initProcess();
         createMvnProject();
+    }
+
+    @GetMapping("/backup")
+    public void backup() throws Exception
+    {
+        log.info("Backup pom.xml");
+        File backup = new File("backup");
+        File pom = new File(backup.getAbsoluteFile() + File.separator + "pom");
+        File intellij = new File(backup.getAbsoluteFile() + File.separator + "intellij");
+        backupPomFile(pom);
+        log.info("Backup .idea");
+        FileUtils.copyDirectory(new File(mvnDev.getAbsoluteFile() + File.separator + ".idea"), intellij);
+        log.info("Backup Complete");
     }
 
     private void cleanCodeBase( File moduleFolder ) throws Exception
@@ -109,25 +122,37 @@ public class Controller {
 
     private void copyPomFiles( File moduleFolder ) throws Exception
     {
-        URL url = getClass().getClassLoader().getResource("pom" + File.separator + moduleFolder.getName() + "_pom.xml");
+        URL url = getClass().getClassLoader().getResource(
+                "backup/pom" + File.separator + moduleFolder.getName() + "_pom.xml");
         FileUtils.copyFile(new File(url.toURI()),
                 new File(moduleFolder.getAbsoluteFile() + File.separator + "pom.xml"));
     }
 
-    private void scanForPom()
+    private void backupPomFile( File backup ) throws Exception
     {
+        String pomFileName = "pom.xml";
+        File mvnPomFile = new File(mvnDev + File.separator + pomFileName);
+        File backupPomFileName = new File(backup.getAbsoluteFile() + File.separator + "Dev.xml");
+        if( mvnPomFile.exists() )
+            FileUtils.copyFile(mvnPomFile, backupPomFileName);
+
         for( String module : modules )
         {
-            String pom = antCodeBase + File.separator + module + File.separator + "pom.xml";
-
-            File file = new File(pom);
-            if( file.exists() )
-            {
-                file.renameTo(new File(mvnCodeBase + File.separator + module + "_pom.xml"));
-            }
-
+            mvnPomFile = new File(mvnDev + File.separator + module + File.separator + pomFileName);
+            backupPomFileName = new File(backup.getAbsoluteFile() + File.separator + module + ".xml");
+            if( mvnPomFile.exists() )
+                FileUtils.copyFile(mvnPomFile, backupPomFileName);
         }
 
 
+    }
+
+    private void copyPomFile( File folder, String module ) throws Exception
+    {
+        String pomFileName = "pom.xml";
+        File mvnPomFile = new File(mvnDev + File.separator + pomFileName);
+        File backupPomFileName = new File(folder.getAbsoluteFile() + File.separator + module + "_pom.xml");
+        if( mvnPomFile.exists() )
+            FileUtils.copyFile(mvnPomFile, backupPomFileName);
     }
 }
