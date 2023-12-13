@@ -79,6 +79,8 @@ public class Controller {
 
     private int executeCommand( File dir, String... args ) throws Exception
     {
+        String command = String.join(" ", args);
+        log.info("Running Command : '{}' -> '{}'", command, dir);
         ProcessBuilder builder = new ProcessBuilder();
         builder.command(args);
         builder.directory(dir);
