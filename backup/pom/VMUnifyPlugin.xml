@@ -37,8 +37,6 @@
             <groupId>com.middleware.nuvelink</groupId>
             <artifactId>jspf.core</artifactId>
             <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${jspf.jar}</systemPath>
         </dependency>
 
     </dependencies>

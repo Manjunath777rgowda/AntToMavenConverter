@@ -169,8 +169,6 @@
             <groupId>com.middleware.nuvelink</groupId>
             <artifactId>license4j-runtime-library</artifactId>
             <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${license4j.jar}</systemPath>
         </dependency>
 
         <dependency>
@@ -190,8 +188,6 @@
             <groupId>com.middleware.nuvelink</groupId>
             <artifactId>jspf.core</artifactId>
             <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${jspf.jar}</systemPath>
         </dependency>
 
         <!--     https://mvnrepository.com/artifact/org.apache.tiles/tiles-api -->

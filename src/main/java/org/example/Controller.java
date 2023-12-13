@@ -2,6 +2,7 @@ package org.example;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Slf4j
@@ -36,53 +39,24 @@ public class Controller {
         initProcess();
         replaceIntellijFiles();
         createMvnProject();
-        addGitToProject();
-        mvnCleanInstall();
+        runCommands();
     }
 
-    private void addGitToProject() throws Exception
+    private void runCommands() throws Exception
     {
-        gitInit();
-        gitAdd();
-        gitCommit();
+        InputStream stream = getClass().getClassLoader().getResourceAsStream("commands");
+        String commandText = IOUtils.toString(stream, StandardCharsets.UTF_8);
+        String[] commands = commandText.split("\n");
+
+        for( String command : commands )
+            executeCommand(mvnDev, command.replaceAll("[\n\r]", ""));
     }
 
-    private void gitInit() throws Exception
+    private void executeCommand( File dir, String command ) throws Exception
     {
-        int exitCode = executeCommand(mvnDev, "cmd.exe", "/c", "git", "init");
-
-        if( exitCode == 0 )
-            System.out.println("*************Git InIt Success*************");
-        else
-            System.out.println("-----------------Git InIt Failed--------------------");
-    }
-
-    private void gitAdd() throws Exception
-    {
-        int exitCode = executeCommand(mvnDev, "cmd.exe", "/c", "git", "add",".");
-
-        if( exitCode == 0 )
-            System.out.println("*************Git Add Success*************");
-        else
-            System.out.println("-----------------Git Add Failed--------------------");
-    }
-
-    private void gitCommit() throws Exception
-    {
-        int exitCode = executeCommand(mvnDev, "cmd.exe", "/c", "git", "commit","-m","'initial commit'");
-
-        if( exitCode == 0 )
-            System.out.println("*************Git Commit Success*************");
-        else
-            System.out.println("-----------------Git Commit Failed--------------------");
-    }
-
-    private int executeCommand( File dir, String... args ) throws Exception
-    {
-        String command = String.join(" ", args);
-        log.info("Running Command : '{}' -> '{}'", command, dir);
+        log.info("Executing command in : {}", mvnDev.getAbsoluteFile());
         ProcessBuilder builder = new ProcessBuilder();
-        builder.command(args);
+        builder.command(command.split(" "));
         builder.directory(dir);
         Process process = builder.start();
         BufferedReader inStreamReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -95,16 +69,11 @@ public class Controller {
                 System.out.println(line);
         } while( line != null );
 
-        return process.waitFor();
-    }
-
-    private void mvnCleanInstall() throws Exception
-    {
-        int exitCode = executeCommand(mvnDev, "cmd.exe", "/c", "mvn", "clean", "install");
+        int exitCode = process.waitFor();
         if( exitCode == 0 )
-            System.out.println("*************Build success*************");
+            log.info("Command '{}' Executed Successfully", command);
         else
-            System.out.println("-----------------Build Failed--------------------");
+            log.info("Command '{}' Failed to Execute", command);
     }
 
     private void replaceIntellijFiles() throws Exception
