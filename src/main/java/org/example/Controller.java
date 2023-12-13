@@ -40,6 +40,7 @@ public class Controller {
         replaceIntellijFiles();
         createMvnProject();
         runCommands();
+        System.out.println("*************Process Completed************");
     }
 
     private void runCommands() throws Exception

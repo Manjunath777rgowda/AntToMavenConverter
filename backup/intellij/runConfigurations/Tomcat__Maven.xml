@@ -1,12 +1,13 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Tomcat: Maven" type="com.poratu.idea.plugins.tomcat">
+    <log_file alias="Tomcat Catalina Log" path="$USER_HOME$/.SmartTomcat/Dev/Server/logs/catalina.*" />
+    <log_file alias="Tomcat Manager Log" path="$USER_HOME$/.SmartTomcat/Dev/Server/logs/manager.*" />
+    <log_file alias="Tomcat Host Manager Log" path="$USER_HOME$/.SmartTomcat/Dev/Server/logs/host-manager.*" />
     <predefined_log_file enabled="true" id="Tomcat Localhost Log" />
     <predefined_log_file enabled="true" id="Tomcat Access Log" />
-    <predefined_log_file id="Tomcat Catalina Log" />
-    <predefined_log_file id="Tomcat Manager Log" />
-    <predefined_log_file id="Tomcat Host Manager Log" />
+    <option name="adminPort" value="8006" />
     <option name="catalinaBase" value="C:\Users\Admin\.SmartTomcat\Dev\Server" />
-    <option name="contextPath" value="/Server" />
+    <option name="contextPath" value="/nuvelink" />
     <option name="docBase" value="$PROJECT_DIR$/Server/src/main/webapp" />
     <option name="envOptions">
       <map>
@@ -17,9 +18,9 @@
     <option name="extraClassPath" value="" />
     <option name="tomcatInfo">
       <TomcatInfo>
-        <option name="name" value="Apache Tomcat/8.5.83" />
-        <option name="path" value="D:/nuvepro_workspace/tomcat/apache-tomcat-8.5.83" />
-        <option name="version" value="8.5.83.0" />
+        <option name="name" value="Apache Tomcat/7.0.21" />
+        <option name="path" value="D:/nuvepro_workspace/tomcat/apache-tomcat-7.0.21" />
+        <option name="version" value="7.0.21.0" />
       </TomcatInfo>
     </option>
     <option name="vmOptions" value="" />
