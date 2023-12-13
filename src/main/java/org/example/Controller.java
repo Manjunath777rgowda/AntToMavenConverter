@@ -36,8 +36,8 @@ public class Controller {
         initProcess();
         replaceIntellijFiles();
         createMvnProject();
-        mvnCleanInstall();
         addGitToProject();
+        mvnCleanInstall();
     }
 
     private void addGitToProject() throws Exception
