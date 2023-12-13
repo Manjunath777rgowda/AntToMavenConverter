@@ -37,13 +37,51 @@ public class Controller {
         replaceIntellijFiles();
         createMvnProject();
         mvnCleanInstall();
+        addGitToProject();
     }
 
-    private void mvnCleanInstall() throws Exception
+    private void addGitToProject() throws Exception
+    {
+        gitInit();
+        gitAdd();
+        gitCommit();
+    }
+
+    private void gitInit() throws Exception
+    {
+        int exitCode = executeCommand(mvnDev, "cmd.exe", "/c", "git", "init");
+
+        if( exitCode == 0 )
+            System.out.println("*************Git InIt Success*************");
+        else
+            System.out.println("-----------------Git InIt Failed--------------------");
+    }
+
+    private void gitAdd() throws Exception
+    {
+        int exitCode = executeCommand(mvnDev, "cmd.exe", "/c", "git", "add",".");
+
+        if( exitCode == 0 )
+            System.out.println("*************Git Add Success*************");
+        else
+            System.out.println("-----------------Git Add Failed--------------------");
+    }
+
+    private void gitCommit() throws Exception
+    {
+        int exitCode = executeCommand(mvnDev, "cmd.exe", "/c", "git", "commit","-m","'initial commit'");
+
+        if( exitCode == 0 )
+            System.out.println("*************Git Commit Success*************");
+        else
+            System.out.println("-----------------Git Commit Failed--------------------");
+    }
+
+    private int executeCommand( File dir, String... args ) throws Exception
     {
         ProcessBuilder builder = new ProcessBuilder();
-        builder.command("cmd.exe", "/c", "mvn", "clean", "install");
-        builder.directory(mvnDev);
+        builder.command(args);
+        builder.directory(dir);
         Process process = builder.start();
         BufferedReader inStreamReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
@@ -55,7 +93,12 @@ public class Controller {
                 System.out.println(line);
         } while( line != null );
 
-        int exitCode = process.waitFor();
+        return process.waitFor();
+    }
+
+    private void mvnCleanInstall() throws Exception
+    {
+        int exitCode = executeCommand(mvnDev, "cmd.exe", "/c", "mvn", "clean", "install");
         if( exitCode == 0 )
             System.out.println("*************Build success*************");
         else
