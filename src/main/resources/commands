@@ -1,6 +1,6 @@
 cmd.exe /c git init
 cmd.exe /c git add .
-cmd.exe /c git commit -m 'initial commit'
+cmd.exe /c git commit -m init
 cmd.exe /c mvn install:install-file -Dfile=D:\projects\AntToMavenConverter\backup\jars\jspf.core-1.0.2.jar -DgroupId=com.middleware.nuvelink -DartifactId=jspf.core -Dversion=1.0 -Dpackaging=jar
 cmd.exe /c mvn install:install-file -Dfile=D:\projects\AntToMavenConverter\backup\jars\LICENSE4J-Runtime-Library.jar -DgroupId=com.middleware.nuvelink -DartifactId=license4j-runtime-library -Dversion=1.0 -Dpackaging=jar
 cmd.exe /c mvn clean install verify dependency-check:aggregate
