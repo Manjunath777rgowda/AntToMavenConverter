@@ -74,7 +74,7 @@ public class Controller {
         if( exitCode == 0 )
             log.info("Command '{}' Executed Successfully", command);
         else
-            log.info("Command '{}' Failed to Execute", command);
+            log.error("Command '{}' Failed to Execute", command);
     }
 
     private void replaceIntellijFiles() throws Exception
