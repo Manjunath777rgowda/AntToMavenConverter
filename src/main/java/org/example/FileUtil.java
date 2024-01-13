@@ -10,11 +10,14 @@ public class FileUtil {
 
     public static void createFolder( File file) throws Exception
     {
-        boolean mkdir = file.mkdir();
-        if( !mkdir )
+        if( !file.exists() )
         {
-            log.error("Failed creating folder : {}", file);
-            throw new Exception("Failed creating folder : {}" + file.getAbsoluteFile());
+            boolean mkdir = file.mkdir();
+            if( !mkdir )
+            {
+                log.error("Failed creating folder : {}", file);
+                throw new Exception("Failed creating folder : {}" + file.getAbsoluteFile());
+            }
         }
     }
 

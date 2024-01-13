@@ -39,8 +39,14 @@ public class Controller {
         initProcess();
         replaceIntellijFiles();
         createMvnProject();
-        runCommands();
+        postProcess();
+        //                runCommands();
         System.out.println("*************Process Completed************");
+    }
+
+    private void postProcess() throws Exception
+    {
+        checkGitAtEnd();
     }
 
     private void runCommands() throws Exception
@@ -53,9 +59,12 @@ public class Controller {
             executeCommand(mvnDev, command.replaceAll("[\n\r]", ""));
     }
 
-    private void executeCommand( File dir, String command ) throws Exception
+    private CommandResult executeCommand( File dir, String command ) throws Exception
     {
-        log.info("Executing command in : {}", mvnDev.getAbsoluteFile());
+        log.info("Executing command in : {}", dir.getAbsoluteFile());
+        CommandResult commandResult = new CommandResult();
+        commandResult.setCommand(command);
+        commandResult.setPath(dir.getAbsolutePath());
         ProcessBuilder builder = new ProcessBuilder();
         builder.command(command.split(" "));
         builder.directory(dir);
@@ -67,14 +76,20 @@ public class Controller {
         {
             line = inStreamReader.readLine();
             if( line != null )
+            {
+                commandResult.setResult(commandResult.getCommand() + "\n" + line);
                 System.out.println(line);
+            }
         } while( line != null );
 
         int exitCode = process.waitFor();
+        commandResult.setExitCode(exitCode);
         if( exitCode == 0 )
             log.info("Command '{}' Executed Successfully", command);
         else
             log.error("Command '{}' Failed to Execute", command);
+
+        return commandResult;
     }
 
     private void replaceIntellijFiles() throws Exception
@@ -115,10 +130,72 @@ public class Controller {
     private void initProcess() throws Exception
     {
         backup();
-        FileUtil.deleteFolder(mvnCodeBase);
         FileUtil.createFolder(mvnCodeBase);
         FileUtil.createFolder(mvnDev);
+        checkGitAtStart();
         copyPomFiles(mvnDev);
+    }
+
+    private void checkGitAtStart() throws Exception
+    {
+        boolean gitExist = isGitClean();
+        if( gitExist )
+            checkOutToMaster();
+    }
+
+    private void checkGitAtEnd() throws Exception
+    {
+        boolean gitExist = isGitExist();
+        if( !gitExist )
+        {
+            gitInit();
+        }
+    }
+
+    private void checkOutToMaster() throws Exception
+    {
+        CommandResult commandResult = executeCommand(mvnDev, "cmd.exe /c git checkout master");
+
+        if( commandResult.getExitCode() != 0 )
+        {
+            log.error("Unable To checkout to master");
+            throw new Exception("Unable To checkout to master");
+        }
+    }
+
+    private void gitInit() throws Exception
+    {
+        CommandResult commandResult = executeCommand(mvnDev, "cmd.exe /c git init && git add .");
+
+        if( commandResult.getExitCode() != 0 )
+        {
+            log.error("Unable To checkout to master");
+            throw new Exception("Unable To checkout to master");
+        }
+    }
+
+    private boolean isGitExist() throws Exception
+    {
+        CommandResult commandResult = executeCommand(mvnDev, "cmd.exe /c git status");
+        return commandResult.getExitCode() == 0;
+    }
+
+    private boolean isGitClean() throws Exception
+    {
+        CommandResult commandResult = executeCommand(mvnDev, "cmd.exe /c git status");
+
+        if( isGitExist() )
+        {
+            if( !commandResult.getResult().contains("nothing to commit, working tree clean") )
+            {
+                log.error("Changes found in the git");
+                throw new Exception("Changes found in the git");
+            }
+            return true;
+        }
+        else
+            return false;
+
     }
 
     private void createMvnProject()
@@ -131,6 +208,7 @@ public class Controller {
                 File antCodeBaseFolder = new File(antCodeBase + File.separator + module);
                 File moduleFolder = new File(mvnDev.getAbsoluteFile() + File.separator + module);
                 log.info("Copying : {}", moduleFolder);
+                FileUtil.deleteFolder(moduleFolder);
                 FileUtils.copyDirectory(antCodeBaseFolder, moduleFolder);
                 log.info("Cleaning : {}", moduleFolder);
                 cleanCodeBase(moduleFolder);
