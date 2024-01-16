@@ -24,6 +24,7 @@
     <module>OpenStackPlugin</module>
     <module>PowerBIWrapper</module>
     <module>VMUnifyPlugin</module>
+    <module>GuacAuthExtn</module>
     <module>Server</module>
   </modules>
 

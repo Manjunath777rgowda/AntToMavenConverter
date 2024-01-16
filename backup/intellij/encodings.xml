@@ -13,6 +13,8 @@
     <file url="file://$PROJECT_DIR$/CommonBeans/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/GCPPlugin/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/GCPPlugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/GuacAuthExtn/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/GuacAuthExtn/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/JobEngine/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/JobEngine/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/NotificationHandler/src/main/java" charset="UTF-8" />

@@ -39,7 +39,7 @@ public class Controller {
         initProcess();
         replaceIntellijFiles();
         createMvnProject();
-        postProcess();
+        //        postProcess();
         //                runCommands();
         System.out.println("*************Process Completed************");
     }
