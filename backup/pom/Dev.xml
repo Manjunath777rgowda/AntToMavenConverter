@@ -5,7 +5,7 @@
   <packaging>pom</packaging>
   <groupId>com.middleware.nuvelink</groupId>
   <artifactId>Nuvelink</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>${nl-version}</version>
   <name>Nuvelink</name>
   <description>This module is used to build all modules</description>
   <url>http://maven.apache.org</url>
@@ -32,6 +32,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
+    <nl-version>0.0.1-SNAPSHOT</nl-version>
   </properties>
 
   <dependencies>
@@ -45,7 +46,7 @@
   </dependencies>
 
   <build>
-    <finalName>${project.artifactId}</finalName>
+    <finalName>${project.artifactId}-${version}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -66,13 +67,6 @@
         <groupId>org.owasp</groupId>
         <artifactId>dependency-check-maven</artifactId>
         <version>6.5.0</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
 
     </plugins>

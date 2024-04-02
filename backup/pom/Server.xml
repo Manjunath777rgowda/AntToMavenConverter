@@ -5,7 +5,7 @@
     <parent>
         <artifactId>Nuvelink</artifactId>
         <groupId>com.middleware.nuvelink</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${nl-version}</version>
     </parent>
 
     <groupId>com.middleware.nuvelink.server</groupId>
@@ -18,79 +18,79 @@
         <dependency>
             <groupId>com.middleware.nuvelink.result</groupId>
             <artifactId>Result</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${nl-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.middleware.nuvelink.commons</groupId>
             <artifactId>CommonBeans</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${nl-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.middleware.nuvelink.commons</groupId>
             <artifactId>CommonAPI</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${nl-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.middleware.nuvelink.amazon</groupId>
             <artifactId>AmazonPlugin</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${nl-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.middleware.nuvelink.azurecsp</groupId>
             <artifactId>AzureCSPPlugin</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${nl-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.middleware.nuvelink.azure</groupId>
             <artifactId>AzurePlugin</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${nl-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.middleware.nuvelink.gcp</groupId>
             <artifactId>GCPPlugin</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${nl-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.middleware.nuvelink.notification</groupId>
             <artifactId>NotificationHandler</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${nl-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.middleware.nuvelink.job</groupId>
             <artifactId>JobEngine</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${nl-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.middleware.nuvelink.session</groupId>
             <artifactId>SessionManager</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${nl-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.middleware.nuvelink.vmunify</groupId>
             <artifactId>VMUnifyPlugin</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${nl-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.middleware.nuvelink.powerbi</groupId>
             <artifactId>PowerBIWrapper</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${nl-version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.middleware.nuvelink.openstack</groupId>
             <artifactId>OpenStackPlugin</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${nl-version}</version>
         </dependency>
 
         <dependency>
@@ -282,8 +282,10 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>dist</directory>
                             <directory>lib</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>dist</directory>
                         </fileset>
                     </filesets>
                 </configuration>

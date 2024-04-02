@@ -5,7 +5,7 @@
   <parent>
     <artifactId>Nuvelink</artifactId>
     <groupId>com.middleware.nuvelink</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${nl-version}</version>
   </parent>
 
   <groupId>com.middleware.nuvelink.commons</groupId>
